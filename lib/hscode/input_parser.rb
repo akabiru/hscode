@@ -1,5 +1,5 @@
 module Hscode
-   class InputParser
+  class InputParser
     #
     # Return a structure describing options
     #
@@ -16,9 +16,9 @@ module Hscode
         parser.separator "Specific options:"
 
         parser.on("-c", "--code [CODE]", Integer,
-          "Show HTTP status code documentation") do |code|
-            puts code
-            exit
+                  "Show HTTP status code documentation") do |code|
+          puts code
+          exit
         end
 
         parser.separator ""
@@ -30,7 +30,7 @@ module Hscode
         end
 
         parser.on_tail("--version", "Show version") do
-          puts ::VERSION
+          puts Hscode::VERSION
           exit
         end
       end
