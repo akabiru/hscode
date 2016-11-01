@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-
+require "bundler/setup"
 require "hscode"
 require "pp"
 
-options = Hscode.parse(ARGV)
+options = Hscode::InputParser.parse(ARGV)
 pp options
 pp ARGV

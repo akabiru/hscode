@@ -3,7 +3,7 @@ require "optparse"
 require "ostruct"
 
 module Hscode
-  class OptionsParser
+  class InputParser
     #
     # Return a structure describing options
     #
@@ -12,14 +12,14 @@ module Hscode
       options = OpenStruct.new
       options.verbose = false
 
-      opt_parser = OptionsParser.new do |parser|
+      opt_parser = OptionParser.new do |parser|
         parser.banner = "Usage: hscode [options]"
 
         parser.separator ""
-        parse.separator "Specific options:"
+        parser.separator "Specific options:"
 
         parser.on("-s", "--status [CODE]", Integer,
-          "Show documentation for HTTP status code") do |code|
+          "Show HTTP status code documentation") do |code|
             puts code
             exit
         end
