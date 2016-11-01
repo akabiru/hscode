@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 require "bundler/setup"
 require "hscode"
-require "pp"
 
-options = Hscode::InputParser.parse(ARGV)
-pp options
-pp ARGV
+Hscode::CliController.new.call(ARGV)
