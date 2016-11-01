@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "hscode"
+require "pp"
+
+options = Hscode.parse(ARGV)
+pp options
+pp ARGV
