@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-
 require "bundler/setup"
 require "hscode"
 
-require "pry"
-Pry.start
+Hscode::CliController.new.call(ARGV)
