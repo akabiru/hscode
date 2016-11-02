@@ -1,8 +1,8 @@
-require "hscode/version"
-require "hscode/input_parser"
-require "optparse"
-require "ostruct"
-require "pp"
+require 'hscode/version'
+require 'hscode/input_parser'
+require 'optparse'
+require 'ostruct'
+require 'pp'
 
 module Hscode
   class CliController

@@ -7,10 +7,10 @@ RSpec::Core::RakeTask.new(:spec)
 RuboCop::RakeTask.new
 
 namespace :setup do
-  desc "source environment variables"
+  desc 'source environment variables'
   task :env do
     Bootstrap::Config.get
   end
 end
 
-task :default => [:spec, :rubocop]
+task default: [:spec, :rubocop]
