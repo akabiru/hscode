@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require "bundler/setup"
-require "hscode"
+require 'bundler/setup'
+require 'hscode'
 
 Hscode::CliController.new.call(ARGV)

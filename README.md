@@ -1,3 +1,5 @@
+[![codebeat badge](https://codebeat.co/badges/b4067adc-06cb-4142-a985-519555be3070)](https://codebeat.co/projects/github-com-akabiru-hscode) [![Dependency Status](https://gemnasium.com/badges/github.com/akabiru/hscode.svg)](https://gemnasium.com/github.com/akabiru/hscode) [![Inline docs](http://inch-ci.org/github/akabiru/hscode.svg?branch=master)](http://inch-ci.org/github/akabiru/hscode) [![Coverage Status](https://coveralls.io/repos/github/akabiru/hscode/badge.svg)](https://coveralls.io/github/akabiru/hscode) [![Build Status](https://travis-ci.org/akabiru/hscode.svg?branch=master)](https://travis-ci.org/akabiru/hscode)
+
 # Hscode
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hscode`. To experiment with that code, run `bin/console` for an interactive prompt.

@@ -1,5 +1,12 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.3.0
+- 2.3.0
 before_install: gem install bundler -v 1.12.5
+deploy:
+  provider: rubygems
+  api_key:
+    secure: ET9Qj67Fff2mDFhycQqd32R0xCAz3Mh7ucpCcggEXB8aX0i5a8E2FzmU4Qvx4d6HdMuhf43vKrXxf/3tAyxBR61S9KJYTELycmCAxuywZvrwHAhn4Cr7kIAl/3omRTlCrVzV+WcSLRlasNXtdxxf+iJVfmxCLR2lWpxXAohai6MuxfHEs6D0QFRkWVMblQpXxSDfTAcUP+6jyD79an8peCHwoFzF62XCVHowd5arEQRr2iFRQw+vmoydlSkgRTvoMGh6VMSoCIA0Dn2g4/CLnfZ24CHBoFwH5EJvWiqfAsYwAhTh0CGWt6efkeutoPbfqCOJAZi9MxyVmAnq6LvPSprmFWAynYK6pyYxNURWaxg+2f/bR9f+CUQatilMRQAP+ZwhtsdTrqiODLwZdJCuLp96k7B4hriM6qJY4BJiOJBUPl2g64h99MAZeQWndUIhFkVm4PsIkhiXWniXIMAvVBohm+GJGX00sKEGCkc696+PjcgYKZgq9WCB0KRBEPirQqJ4upIBTAKZIJsOsVtR4SXxAqyQ2lS46qVZHfJEJoNiW0MeRpxYKhnl1tEb3ZIaciu4oTpuTSmWfL3lJpnACeQHdxl6/GBqdBGl4+8grczLF+8Lv+s2RT6sOamxYXidehaOSTeXZ6cQ4XxVdN21rzvpHEwScdUCYPPyu63LYBs=
+  gem: hscode
+  on:
+    tags: true

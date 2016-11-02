@@ -4,31 +4,33 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hscode/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "hscode"
+  spec.name          = 'hscode'
   spec.version       = Hscode::VERSION
-  spec.authors       = ["Austin Kabiru"]
-  spec.email         = ["makabby@gmail.com"]
+  spec.authors       = ['Herbert Kagumba']
+  spec.email         = ['habukagumba@gmail.com']
 
   spec.summary       = %q{A HTTP status code lookup command line tool.}
   spec.description   = %q{Quickly look up any status code without leaving your terminal.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  # if spec.respond_to?(:metadata)
-  #   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  # else
-  #   raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  # end
+  spec.homepage      = ''
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 1.12"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency 'bundler', '~> 1.12'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'pry', '~> 0.10'
+  spec.add_development_dependency 'guard', '~> 2.14'
+
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'coveralls', '~> 0.8'
+  spec.add_development_dependency 'simplecov', '~> 0.12'
+  spec.add_development_dependency 'guard-rspec', '~> 4.7'
+
+  spec.add_development_dependency 'yard', '~> 0.9'
+  spec.add_development_dependency 'rubocop', '~> 0.42'
+  spec.add_development_dependency 'brakeman', '~> 3.3'
+  spec.add_development_dependency 'rubycritic', '~> 2.9'
 end
