@@ -8,3 +8,5 @@ AllCops:
 Style/Documentation:
   Exclude:
     - "lib/**/*"
+Metrics/ModuleLength:
+  Enabled: false

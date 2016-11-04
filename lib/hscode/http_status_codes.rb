@@ -130,8 +130,8 @@ module Hscode
         was successful and the ETag field-value contains the entity-tag for \
         the new representation of that target resource.",
         "The 204 response allows a server to indicate that the action has \
-        been successfully applied to the target resource, while implying that \
-        the user agent does not need to traverse away from its \
+        been successfully applied to the target resource, while implying \
+        that the user agent does not need to traverse away from its \
         current \"document view\" (if any). The server assumes that the user \
         agent will provide some indication of the success to its user, in \
         accord with its own interface, and apply any new or updated metadata \
@@ -376,9 +376,9 @@ module Hscode
         the new references sent by the server, where possible.",
         "The server SHOULD generate a Location header field in the response \
         containing a preferred URI reference for the new permanent URI. The \
-        user agent MAY use the Location field value for automatic redirection. \
-        The server's response payload usually contains a short hypertext note \
-        with a hyperlink to the new URI(s).",
+        user agent MAY use the Location field value for automatic\
+        redirection. The server's response payload usually contains a short \
+        hypertext note with a hyperlink to the new URI(s).",
         "Note: For historical reasons, a user agent MAY change the request \
         method from POST to GET for the subsequent request. If this behavior \
         is undesired, the 307 Temporary Redirect status code can be \
@@ -724,8 +724,8 @@ module Hscode
         that points to a suffix of itself) or when the server is under \
         attack by a client attempting to exploit potential \
         security holes.", "A 414 response is cacheable by default; i.e., \
-            unless otherwise indicated by the method definition or explicit \
-            cache controls 2."
+        unless otherwise indicated by the method definition or explicit \
+        cache controls 2."
       ]
     },
     415 => {
@@ -860,9 +860,9 @@ module Hscode
       description: [
         "The user has sent too many requests in a given amount of time \
         (\"rate limiting\").", "The response representations SHOULD \
-            include details explaining the condition, and MAY include a \
-            Retry-After header indicating how long to wait before making a \
-            new request.",
+        include details explaining the condition, and MAY include a \
+        Retry-After header indicating how long to wait before making a \
+        new request.",
         'For example:',
         "Note that this specification does not define how the origin \
         server identifies the user, nor how it counts requests. For \
@@ -887,6 +887,200 @@ module Hscode
         which header field was too large.",
         'For example:',
         'Responses with the 431 status code MUST NOT be stored by a cache.'
+      ]
+    },
+    444 => {
+      title: 'Connection Closed Without Response',
+      description: [
+        "A non-standard status code used to instruct nginx to close the \
+        connection without sending a response to the client, most \
+        commonly used to deny malicious or malformed requests.",
+        "This status code is not seen by the client, it only appears \
+        in nginx log files."
+      ]
+    },
+    451 => {
+      title: 'Unavailable For Legal Reasons',
+      description: [
+        "The server is denying access to the resource as a consequence \
+        of a legal demand.",
+        "The server in question might not be an origin server. \
+        This type of legal demand typically most directly affects the \
+        operations of ISPs and search engines.",
+        "Responses using this status code SHOULD include an explanation, \
+        in the response body, of the details of the legal demand: the \
+        party making it, the applicable legislation or regulation, and \
+        what classes of person and resource it applies to. For example:",
+        "The use of the 451 status code implies neither the existence \
+        nor non- existence of the resource named in the request. \
+        That is to say, it is possible that if the legal demands \
+        were removed, a request for the resource still might not succeed.",
+        "Note that in many cases clients can still access the denied \
+        resource by using technical countermeasures such as a VPN or \
+        the Tor network.",
+        "A 451 response is cacheable by default; i.e., unless otherwise \
+        indicated by the method definition or explicit cache controls; \
+        see RFC7234."
+      ]
+    },
+    499 => {
+      title: 'Client Closed Request',
+      description: [
+        "A non-standard status code introduced by nginx for the case \
+        when a client closes the connection while nginx is processing \
+        the request."
+      ]
+    },
+    500 => {
+      title: 'Internal Server Error',
+      description: [
+        "The server encountered an unexpected condition that prevented \
+        it from fulfilling the request."
+      ]
+    },
+    501 => {
+      title: 'Not Implemented',
+      description: [
+        "The server does not support the functionality required to \
+        fulfill the request.",
+        "This is the appropriate response when the server does not \
+        recognize the request method and is not capable of supporting \
+        it for any resource.",
+        "A 501 response is cacheable by default; i.e., unless otherwise \
+        indicated by the method definition or explicit cache controls."
+      ]
+    },
+    502 => {
+      title: 'Bad Gateway',
+      description: [
+        "The server, while acting as a gateway or proxy, received an \
+        invalid response from an inbound server it accessed while \
+        attempting to fulfill the request."
+      ]
+    },
+    503 => {
+      title: 'Service Unavailable',
+      description: [
+        "The server is currently unable to handle the request due to \
+        a temporary overload or scheduled maintenance, which will likely \
+        be alleviated after some delay.",
+        "The server MAY send a Retry-After header field to suggest an \
+        appropriate amount of time for the client to wait before \
+        retrying the request.",
+        "Note: The existence of the 503 status code does not imply that \
+        a server has to use it when becoming overloaded. Some servers \
+        might simply refuse the connection."
+      ]
+    },
+    504 => {
+      title: 'Gateway Timeout',
+      description: [
+        "The server, while acting as a gateway or proxy, did not \
+        receive a timely response from an upstream server it needed \
+        to access in order to complete the request."
+      ]
+    },
+    505 => {
+      title: 'HTTP Version Not Supported',
+      description: [
+        "The server does not support, or refuses to support, the major \
+        version of HTTP that was used in the request message.",
+        "The server is indicating that it is unable or unwilling to complete \
+        the request using the same major version as the client, as described \
+        in Section 2.6 of RFC7230, other than with this error message. The \
+        server SHOULD generate a representation for the 505 response that \
+        describes why that version is not supported and what other protocols \
+        are supported by that server."
+      ]
+    },
+    506 => {
+      title: 'Variant Also Negotiates',
+      description: [
+        "The server has an internal configuration error: the chosen variant \
+        resource is configured to engage in transparent content negotiation \
+        itself, and is therefore not a proper end point in the \
+        negotiation process."
+      ]
+    },
+    507 => {
+      title: 'Insufficient Storage',
+      description: [
+        "The method could not be performed on the resource because the \
+        server is unable to store the representation needed to successfully \
+        complete the request.",
+        "This condition is considered to be temporary. If the request that \
+        received this status code was the result of a user action, the \
+        request MUST NOT be repeated until it is requested by a \
+        separate user action."
+      ]
+    },
+    508 => {
+      title: 'Loop Detected',
+      description: [
+        "The server terminated an operation because it encountered an \
+        infinite loop while processing a request with \"Depth: infinity\". \
+        This status indicates that the entire operation failed."
+      ]
+    },
+    510 => {
+      title: 'Not Extended',
+      description: [
+        "The policy for accessing the resource has not been met in the \
+        request. The server should send back all the information necessary \
+        for the client to issue an extended request.",
+        "It is outside the scope of this specification to specify how the \
+        extensions inform the client.", "If the 510 response contains \
+        information about extensions that were not present in the initial \
+        request then the client MAY repeat the request if it has reason to \
+        believe it can fulfill the extension policy by modifying the request \
+        according to the information provided in the 510 response. Otherwise \
+        the client MAY present any entity included in the 510 response to the \
+        user, since that entity may include relevant diagnostic information."
+      ]
+    },
+    511 => {
+      title: 'Network Authentication Required',
+      description: [
+        'The client needs to authenticate to gain network access.',
+        "The response representation SHOULD contain a link to a resource \
+        that allows the user to submit credentials (e.g., with an HTML form).",
+        "Note that the 511 response SHOULD NOT contain a challenge or the \
+        login interface itself, because browsers would show the login \
+        interface as being associated with the originally requested URL, \
+        which may cause confusion.",
+        "The 511 status SHOULD NOT be generated by origin servers; \
+        it is intended for use by intercepting proxies that are interposed \
+        as a means of controlling access to the network.",
+        'Responses with the 511 status code MUST NOT be stored by a cache.',
+        "The 511 status code is designed to mitigate problems caused \
+        by \"captive portals\" to software (especially non-browser agents) \
+        that is expecting a response from the server that a request was made \
+        to, not the intervening network infrastructure. It is not intended \
+        to encourage deployment of captive portals -- only to limit the \
+        damage caused by them.",
+        "A network operator wishing to require some \
+        authentication, acceptance of terms, or other user interaction before \
+        granting access usually does so by identifying clients who have not \
+        done so (\"unknown clients\") using their Media Access \
+        Control (MAC) addresses.",
+        "Unknown clients then have all traffic blocked, except for that on \
+        TCP port 80, which is sent to an HTTP server (the \"login server\") \
+        dedicated to \"logging in\" unknown clients, and of course traffic \
+        to the login server itself.",
+        "For example, a user agent might connect to a network and make the \
+        following HTTP request on TCP port 80:", "Upon receiving such a \
+        request, the login server would generate a 511 response:",
+        "Here, the 511 status code assures that non-browser clients will \
+        not interpret the response as being from the origin server, and the \
+        META HTML element redirects the user agent to the login server."
+      ]
+    },
+    599 => {
+      title: 'Network Connect Timeout Error',
+      description: [
+        "This status code is not specified in any RFCs, but is used by some \
+        HTTP proxies to signal a network connect timeout behind the proxy to \
+        a client in front of the proxy."
       ]
     }
   }.freeze
