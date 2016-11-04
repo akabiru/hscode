@@ -6,7 +6,7 @@ require 'hscode/version'
 Gem::Specification.new do |spec|
   spec.name          = 'hscode'
   spec.version       = Hscode::VERSION
-  spec.authors       = ['Herbert Kagumba']
+  spec.authors       = ['Herbert Kagumba', 'Austin Kabiru']
   spec.email         = ['habukagumba@gmail.com']
 
   spec.summary       = %q{A HTTP status code lookup command line tool.}
