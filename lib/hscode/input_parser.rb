@@ -7,7 +7,6 @@ module Hscode
       # Default options
       options = OpenStruct.new
       options.verbose = false
-      options.code = '200'
 
       opt_parser = OptionParser.new do |parser|
         parser.banner = 'Usage: hscode [options]'
@@ -17,12 +16,22 @@ module Hscode
 
         parser.on('-c', '--code [CODE]', Integer,
                   'Show HTTP status code documentation') do |code|
-          puts code
+          options.status_code = code
+        end
+
+        parser.on('-v', '--verbose',
+                  'Show full HTTP status code documentation') do |_v|
+          options.verbose = true
+        end
+
+        parser.on('-l', '--list', 'List all HTTP status codes') do
+          HTTP_STATUS_CODES.each do |code, info|
+            puts "#{code}  - #{info[:title]}"
+          end
           exit
         end
 
         parser.separator ''
-        parser.separator 'Common options:'
 
         parser.on_tail('-h', '--help', 'Show this help message') do
           puts parser
@@ -37,6 +46,9 @@ module Hscode
 
       opt_parser.parse!(args)
       options
+    rescue OptionParser::InvalidOption => e
+      puts e, "See 'hscode --help'."
+      exit 1
     end # parser()
   end # class OptionsParser
 end
