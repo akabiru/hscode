@@ -1,16 +1,19 @@
-#!/usr/bin/env ruby
-# encoding: UTF-8
-
 module Hscode
-  COLORS = {
-    info: 6,
-    success: 2,
-    neutral: 3,
-    error: 1,
-    warning: 9
-  }
-
   class PrettyPrint
+    COLORS = {
+      "1" => 6,
+      "2" => 2,
+      "3" => 3,
+      "4" => 9,
+      "5" => 1
+    }
+
+    def self.print(text, colour_code)
+      puts make_pretty(text, COLORS[colour_code])
+    end
+
+    private
+
     def self.make_pretty(text, color_code)
       "\x1b[38;5;#{color_code}m#{text}\n"
     end
