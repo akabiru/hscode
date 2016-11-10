@@ -11,7 +11,9 @@ module Hscode
     def parse(args)
       option_parser.parse!(args)
       options
-    rescue OptionParser::InvalidOption, OptionParser::InvalidArgument => e
+    rescue OptionParser::InvalidOption,
+           OptionParser::InvalidArgument,
+           OptionParser::MissingArgument => e
       puts e, "See 'hscode --help'."
       exit 1
     end
