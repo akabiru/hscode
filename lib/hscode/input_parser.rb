@@ -10,8 +10,8 @@ module Hscode
 
     def parse(args)
       option_parser.parse!(args)
-      @options
-    rescue OptionParser::InvalidOption => e
+      options
+    rescue OptionParser::InvalidOption, OptionParser::InvalidArgument => e
       puts e, "See 'hscode --help'."
       exit 1
     end
@@ -70,9 +70,9 @@ module Hscode
     end
 
     def print_all_codes
-      HTTP_STATUS_CODES.map do |code, description|
+      HTTP_STATUS_CODES.map do |code, info_hash|
         colour_code = code.to_s[0]
-        PrettyPrint.print("#{code} - #{description[:title]}", colour_code)
+        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
       end
       exit
     end
