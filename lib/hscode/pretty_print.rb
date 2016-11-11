@@ -1,6 +1,7 @@
 module Hscode
   class PrettyPrint
     COLORS = {
+      '0' => 255,
       '1' => 6,
       '2' => 2,
       '3' => 3,

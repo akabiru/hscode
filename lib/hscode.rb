@@ -29,7 +29,9 @@ module Hscode
     end
 
     def self.print_description(status_code)
-      status_code[:description].each { |desc| puts "\n#{desc}" }
+      status_code[:description].each do |desc|
+        PrettyPrint.print("\n#{desc}", '0')
+      end
     end
   end
 end
