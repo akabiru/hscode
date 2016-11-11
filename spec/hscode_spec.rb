@@ -28,6 +28,15 @@ describe Hscode do
           expect(non_verbose_cmd).to be_nil
         end
       end
+
+      context 'when status code is invalid' do
+        let(:invalid_code) { described_class.call(['-c', '800']) }
+        let(:error_msg) { "800 is not a valid code. See 'hscode --help'." }
+
+        it 'prints an error message' do
+          expect(invalid_code).to be_eql error_msg
+        end
+      end
     end
   end
 end

@@ -17,5 +17,13 @@ describe Hscode::InputParser do
         expect(options.status_code).to eq(500)
       end
     end
+
+    context 'Invalid requests' do
+      let(:options) { new_input_parser.parse(['-f']) }
+
+      it 'raises an error' do
+        expect { options }.to raise_error
+      end
+    end
   end
 end
