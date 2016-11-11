@@ -37,17 +37,17 @@ module Hscode
       end
     end
 
-    def run_verbosely(opts)
-      opts.on('-v', '--verbose',
-              'Show full HTTP status code documentation') do |v|
-        options.verbose = v
-      end
-    end
-
     def show_status_code(opts)
       opts.on('-c', '--code CODE', Integer,
               'Show HTTP status code documentation') do |code|
         options.status_code = code
+      end
+    end
+
+    def run_verbosely(opts)
+      opts.on('-v', '--verbose',
+              'Show full HTTP status code documentation') do |v|
+        options.verbose = v
       end
     end
 
@@ -59,7 +59,11 @@ module Hscode
 
     def display_help_message(opts)
       opts.on_tail('-h', '--help', 'Show this help message') do
-        puts opts
+        puts opts, 'Examples:
+          hscode -c 200
+          hscode -c 200 -v
+          hscode -l
+        '
         exit
       end
     end
