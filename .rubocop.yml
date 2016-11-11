@@ -10,3 +10,6 @@ Style/Documentation:
     - "lib/**/*"
 Metrics/ModuleLength:
   Enabled: false
+Metrics/MethodLength:
+  Exclude:
+    - "lib/hscode/input_parser.rb"

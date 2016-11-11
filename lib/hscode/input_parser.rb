@@ -1,42 +1,86 @@
+require 'hscode/pretty_print'
+
 module Hscode
   class InputParser
-    #
-    # Return a structure describing options
-    #
-    def self.parse(args)
-      # Default options
-      options = OpenStruct.new
-      options.verbose = false
-      options.code = '200'
+    attr_reader :options
 
-      opt_parser = OptionParser.new do |parser|
-        parser.banner = 'Usage: hscode [options]'
+    def initialize
+      @options = OpenStruct.new
+    end
 
-        parser.separator ''
-        parser.separator 'Specific options:'
-
-        parser.on('-c', '--code [CODE]', Integer,
-                  'Show HTTP status code documentation') do |code|
-          puts code
-          exit
-        end
-
-        parser.separator ''
-        parser.separator 'Common options:'
-
-        parser.on_tail('-h', '--help', 'Show this help message') do
-          puts parser
-          exit
-        end
-
-        parser.on_tail('--version', 'Show version') do
-          puts Hscode::VERSION
-          exit
-        end
-      end
-
-      opt_parser.parse!(args)
+    def parse(args)
+      option_parser.parse!(args)
       options
-    end # parser()
-  end # class OptionsParser
+    rescue OptionParser::InvalidOption,
+           OptionParser::InvalidArgument,
+           OptionParser::MissingArgument => e
+      puts e, "See 'hscode --help'."
+      exit 1
+    end
+
+    private
+
+    def option_parser
+      OptionParser.new do |opts|
+        opts.banner = 'Usage: hscode [options]'
+        opts.separator ''
+        opts.separator 'Specific options:'
+
+        run_verbosely(opts)
+        show_status_code(opts)
+        list_status_codes(opts)
+
+        opts.separator ''
+
+        display_help_message(opts)
+        display_version_number(opts)
+      end
+    end
+
+    def show_status_code(opts)
+      opts.on('-c', '--code CODE', Integer,
+              'Show HTTP status code documentation') do |code|
+        options.status_code = code
+      end
+    end
+
+    def run_verbosely(opts)
+      opts.on('-v', '--verbose',
+              'Show full HTTP status code documentation') do |v|
+        options.verbose = v
+      end
+    end
+
+    def list_status_codes(opts)
+      opts.on('-l', '--list', 'List all HTTP status codes') do
+        print_all_codes
+      end
+    end
+
+    def display_help_message(opts)
+      opts.on_tail('-h', '--help', 'Show this help message') do
+        puts opts, 'Examples:
+          hscode -c 200
+          hscode -c 200 -v
+          hscode -l
+        '
+        exit
+      end
+    end
+
+    def display_version_number(opts)
+      opts.on_tail('--version', 'Show version') do
+        puts Hscode::VERSION
+        exit
+      end
+    end
+
+    def print_all_codes
+      HTTP_STATUS_CODES.map do |code, info_hash|
+        colour_code = code.to_s[0]
+        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
+      end
+      exit
+    end
+  end
 end
