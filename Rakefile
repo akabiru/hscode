@@ -13,4 +13,4 @@ namespace :setup do
   end
 end
 
-task default: [:spec]
+task default: [:spec, :rubocop]
