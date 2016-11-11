@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'coveralls'
+require 'pry'
 
 Coveralls.wear!
 
