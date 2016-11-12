@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A HTTP status code lookup command line tool.}
   spec.description   = %q{Quickly look up any status code without leaving your terminal.}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/akabiru/hscode'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
