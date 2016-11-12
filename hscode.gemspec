@@ -6,6 +6,7 @@ require 'hscode/version'
 Gem::Specification.new do |spec|
   spec.name          = 'hscode'
   spec.version       = Hscode::VERSION
+  spec.version       = "#{spec.version}-alpha-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.authors       = ['Herbert Kagumba', 'Austin Kabiru']
   spec.email         = ['habukagumba@gmail.com']
 
