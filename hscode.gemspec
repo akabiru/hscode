@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Hscode::VERSION
   spec.version       = "#{spec.version}-alpha-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.authors       = ['Herbert Kagumba', 'Austin Kabiru']
-  spec.email         = ['habukagumba@gmail.com']
+  spec.email         = ['makabby@gmail.com']
 
   spec.summary       = %q{A HTTP status code lookup command line tool.}
   spec.description   = %q{Quickly look up any status code without leaving your terminal.}
