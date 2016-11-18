@@ -39,8 +39,8 @@ In case you forget something; run help.
     $ hscode -h
 
 
-## Screenshots
-![](https://www.dropbox.com/s/jxc8at9v31q2oy0/Screen%20Shot%202016-11-14%20at%2010.11.32.jpg?raw=1) ![](https://www.dropbox.com/s/80lnkc7w1n7d2rl/Screen%20Shot%202016-11-14%20at%2010.12.22.jpg?raw=1)
+## Screencast
+[![asciicast](https://asciinema.org/a/9vjzetmxefd86dxymbr969et2.png)](https://asciinema.org/a/9vjzetmxefd86dxymbr969et2)
 
 ## Contributing
 
