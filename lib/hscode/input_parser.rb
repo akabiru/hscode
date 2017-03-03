@@ -3,6 +3,13 @@ require 'hscode/pretty_print'
 module Hscode
   class InputParser
     attr_reader :options
+    CODE_REF = {
+      '1xx' => 'Informational',
+      '2xx' => 'Sucess',
+      '3xx' => 'Redirection',
+      '4xx' => 'Client Error',
+      '5xx' => 'Server Error'
+    }
 
     def initialize
       @options = OpenStruct.new
@@ -29,6 +36,7 @@ module Hscode
         run_verbosely(opts)
         show_status_code(opts)
         list_status_codes(opts)
+        list_status_codes_by_type(opts)
 
         opts.separator ''
 
@@ -57,6 +65,14 @@ module Hscode
       end
     end
 
+    def list_status_codes_by_type(opts)
+      opts.on('-l TYPE', '--list TYPE',
+              'List all HTTP status codes of that type') do
+
+        print_all_codes_by_type
+      end
+    end
+
     def display_help_message(opts)
       opts.on_tail('-h', '--help', 'Show this help message') do
         puts opts, 'Examples:
@@ -73,6 +89,15 @@ module Hscode
         puts Hscode::VERSION
         exit
       end
+    end
+
+    def print_all_codes_by_type(type)
+      HTTP_STATUS_CODES.map do |code, info_hash|
+        skip unless type.to_s.[0] == code.to_s[0]
+        colour_code = code.to_s[0]
+        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
+      end
+      exit
     end
 
     def print_all_codes
