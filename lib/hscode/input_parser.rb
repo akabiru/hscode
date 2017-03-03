@@ -67,9 +67,9 @@ module Hscode
 
     def list_status_codes_by_type(opts)
       opts.on('-l TYPE', '--list TYPE',
-              'List all HTTP status codes of that type') do
-
-        print_all_codes_by_type
+              'List all HTTP status codes of that type') do |type|
+        options.status_type = type
+        print_all_codes_by_type(type)
       end
     end
 
@@ -93,7 +93,7 @@ module Hscode
 
     def print_all_codes_by_type(type)
       HTTP_STATUS_CODES.map do |code, info_hash|
-        skip unless type.to_s.[0] == code.to_s[0]
+        next unless type.to_s[0] == code.to_s[0]
         colour_code = code.to_s[0]
         PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
       end
