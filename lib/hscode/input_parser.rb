@@ -9,7 +9,7 @@ module Hscode
       '3xx' => 'Redirection',
       '4xx' => 'Client Error',
       '5xx' => 'Server Error'
-    }
+    }.freeze
 
     def initialize
       @options = OpenStruct.new
@@ -92,6 +92,8 @@ module Hscode
     end
 
     def print_all_codes_by_type(type)
+      PrettyPrint.print("#{type} - #{CODE_REF[type]}", colour_code)
+
       HTTP_STATUS_CODES.map do |code, info_hash|
         next unless type.to_s[0] == code.to_s[0]
         colour_code = code.to_s[0]
