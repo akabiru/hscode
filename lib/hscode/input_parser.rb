@@ -54,7 +54,7 @@ module Hscode
     def list_status_codes(opts)
       opts.on('-l', '--list [TYPE]',
               'List all HTTP status codes of type') do |type|
-        return print_all_codes unless type
+        print_all_codes unless type
         options.status_type = type
         print_all_codes_by_type(type)
       end

@@ -18,11 +18,32 @@ describe Hscode::InputParser do
       end
     end
 
+    context 'valid list http code by type' do
+      it 'returns all http codes belonging to type' do
+        expect do
+          options = new_input_parser.parse(['-l', '5xx'])
+          expect(options).to be_an_instance_of(OpenStruct)
+          expect(options.verbose).to be nil
+          expect(options.status_type).to eq('5xx')
+        end.to raise_error(SystemExit)
+      end
+    end
+
+    context 'list all http codes' do
+      it 'returns all http codes' do
+        expect do
+          options = new_input_parser.parse(['-l'])
+          expect(options).to be_an_instance_of(OpenStruct)
+          expect(options.status_type).to be nil
+        end.to raise_error(SystemExit)
+      end
+    end
+
     context 'Invalid requests' do
       let(:options) { new_input_parser.parse(['-f']) }
 
       it 'raises an error' do
-        expect { options }.to raise_error
+        expect { options }.to raise_error SystemExit
       end
     end
   end

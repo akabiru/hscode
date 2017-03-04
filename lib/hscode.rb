@@ -1,6 +1,7 @@
 require 'hscode/version'
 require 'hscode/input_parser'
 require 'hscode/http_status_codes'
+require 'hscode/status_code_types'
 require 'optparse'
 require 'ostruct'
 
