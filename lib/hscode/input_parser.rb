@@ -60,14 +60,6 @@ module Hscode
       end
     end
 
-    def list_status_codes_by_type(opts)
-      opts.on('-l TYPE', '--list TYPE',
-              'List all HTTP status codes of that type') do |type|
-        options.status_type = type
-        print_all_codes_by_type(type)
-      end
-    end
-
     def display_help_message(opts)
       opts.on_tail('-h', '--help', 'Show this help message') do
         puts opts, 'Examples:
