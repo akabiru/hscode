@@ -92,16 +92,19 @@ module Hscode
     end
 
     def print_all_codes_by_type(type)
-      HTTP_STATUS_CODES.map do |code, info_hash|
-        next if type.to_s[0] > code.to_s[0]
-        break if type.to_s[0] < code.to_s[0]
-        colour_code = code.to_s[0]
-        if (first = true)..false && first
-          PrettyPrint.print("#{type} #{CODE_REF[type]}", colour_code)
-        end
+      colour_code = type.to_s[0]
+      PrettyPrint.print("#{type} #{CODE_REF[type]}", colour_code)
+
+      http_group(type).map do |code, info_hash|
         PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
       end
       exit
+    end
+
+    def http_group(type)
+      HTTP_STATUS_CODES.select do |code, _|
+        type.start_with? code.to_s[0]
+      end
     end
 
     def print_all_codes
