@@ -3,13 +3,6 @@ require 'hscode/pretty_print'
 module Hscode
   class InputParser
     attr_reader :options
-    CODE_REF = {
-      '1xx' => 'Informational',
-      '2xx' => 'Sucess',
-      '3xx' => 'Redirection',
-      '4xx' => 'Client Error',
-      '5xx' => 'Server Error'
-    }.freeze
 
     def initialize
       @options = OpenStruct.new
@@ -98,12 +91,11 @@ module Hscode
       raise OptionParser::InvalidOption unless type =~ /\A[1-5]x{2}\z/
 
       colour_code = type.to_s[0]
-      PrettyPrint.print("#{type} #{CODE_REF[type]}\n", colour_code)
+      PrettyPrint.print("#{type}   #{STATUS_CODE_TYPES[type]}\n", colour_code)
 
       http_group(type).map do |code, info_hash|
         PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
       end
-
       exit
     end
 
