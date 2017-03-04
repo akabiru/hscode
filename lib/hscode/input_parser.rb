@@ -36,7 +36,7 @@ module Hscode
         run_verbosely(opts)
         show_status_code(opts)
         list_status_codes(opts)
-        list_status_codes_by_type(opts)
+        # list_status_codes_by_type(opts)
 
         opts.separator ''
 
@@ -60,8 +60,14 @@ module Hscode
     end
 
     def list_status_codes(opts)
-      opts.on('-l', '--list', 'List all HTTP status codes') do
-        print_all_codes
+      # opts.on('-l', '--list', 'List all HTTP status codes') do
+      #   print_all_codes
+      # end
+
+      opts.on('-l', '--list [TYPE]', String, 'List all HTTP status type') do |type|
+        return print_all_codes unless type
+        options.status_type = type
+        print_all_codes_by_type(type)
       end
     end
 
@@ -102,6 +108,8 @@ module Hscode
     end
 
     def http_group(type)
+      raise OptionParser::InvalidArgument unless type =~ /[1-5]x{2}/
+
       HTTP_STATUS_CODES.select do |code, _|
         type.start_with? code.to_s[0]
       end
