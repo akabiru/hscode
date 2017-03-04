@@ -39,6 +39,26 @@ describe Hscode::InputParser do
       end
     end
 
+    context 'when option is --help' do
+      it 'displays help message' do
+        expect do
+          options = new_input_parser.parse(['--help'])
+          expect(options).to be_an_instance_of(OpenStruct)
+          expect { options }.to output.to_stdout
+        end.to raise_error(SystemExit)
+      end
+    end
+
+    context 'when option is --version' do
+      it 'displays version' do
+        expect do
+          options = new_input_parser.parse(['--version'])
+          expect(options).to be_an_instance_of(OpenStruct)
+          expect { options }.to output.to_stdout
+        end.to raise_error(SystemExit)
+      end
+    end
+
     context 'Invalid requests' do
       let(:options) { new_input_parser.parse(['-f']) }
 
