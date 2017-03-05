@@ -70,8 +70,9 @@ module Hscode
           hscode -c 200
           hscode -c 200 -v
           hscode -l
-          hscode -s 'ok'
-          hscode -s 'ok' -v
+          hscode -s ok
+          hscode -s 'not found'
+          hscode -s ok -v
         "
         exit
       end

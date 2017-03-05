@@ -9,13 +9,13 @@ module Hscode
   class CliController
     def self.call(args)
       options = Hscode::InputParser.new.parse(args)
-      options.title ? print_title_code(options) : print_code(options)
+      options.title ? print_title(options) : print_code(options)
     end
 
     private_class_method
 
     def self.print_code(options)
-      status_code =  HTTP_STATUS_CODES[options.status_code.to_i]
+      status_code = HTTP_STATUS_CODES[options.status_code.to_i]
 
       unless status_code
         puts "#{options.status_code} is not a valid code. See 'hscode --help'."
@@ -29,17 +29,20 @@ module Hscode
       print_description(status_code) if options.verbose
     end
 
-    def self.print_title_code(options)
-      status_object =  HTTP_STATUS_CODES.detect {|_, value| value[:title].downcase == options.title.downcase}
+    def self.print_title(options)
+      status_object = HTTP_STATUS_CODES.detect  do |_, value|
+        value[:title].casecmp(options.title) == 0
+      end
 
       unless status_object
-        puts "#{options.title} is not a valid HTTP status. See 'hscode --list' to see the list of valid HTTP codes."
-        exit
+        puts "#{options.title} is not a valid HTTP status. " \
+        "See 'hscode --list' to see the list of valid HTTP codes."
+        exit 1
       end
 
       status_code = status_object.first
 
-       PrettyPrint.print(
+      PrettyPrint.print(
         "#{status_object[1][:title]} - #{status_code}",
         status_code.to_s[0]
       )
