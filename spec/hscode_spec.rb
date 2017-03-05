@@ -34,7 +34,9 @@ describe Hscode do
         let(:error_msg) { "800 is not a valid code. See 'hscode --help'." }
 
         it 'prints an error message' do
-          expect(invalid_code).to be_eql error_msg
+          expect do
+            expect(invalid_code).to be_eql error_msg
+          end.to terminate.with_code(1)
         end
       end
     end

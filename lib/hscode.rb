@@ -1,6 +1,7 @@
 require 'hscode/version'
 require 'hscode/input_parser'
 require 'hscode/http_status_codes'
+require 'hscode/status_code_types'
 require 'optparse'
 require 'ostruct'
 
@@ -18,7 +19,7 @@ module Hscode
 
       unless status_code
         puts "#{options.status_code} is not a valid code. See 'hscode --help'."
-        exit
+        exit 1
       end
 
       PrettyPrint.print(
