@@ -62,7 +62,7 @@ describe Hscode::InputParser do
     context 'Invalid requests' do
       let(:options) { new_input_parser.parse(['-f']) }
 
-      it 'raises an error' do
+      it 'exit with status 1' do
         expect { options }.to terminate.with_code(1)
       end
     end

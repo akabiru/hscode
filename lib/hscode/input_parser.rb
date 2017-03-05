@@ -80,18 +80,25 @@ module Hscode
     end
 
     def print_all_codes_by_type(type)
-      raise OptionParser::InvalidOption unless type =~ /\A[1-5]x{2}\z/
+      unless type =~ /\A[1-5]x{2}\z/
+        abort "#{type} is not a valid code type. See 'hscode --help'."
+      end
 
       colour_code = type.to_s[0]
       PrettyPrint.print("#{type}   #{STATUS_CODE_TYPES[type]}\n", colour_code)
 
-      http_group(type).map do |code, info_hash|
-        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour_code)
+      process_code_type(type, colour_code)
+    end
+
+    def process_code_type(type, colour)
+      code_type_group(type).map do |code, info_hash|
+        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour)
       end
+
       exit
     end
 
-    def http_group(type)
+    def code_type_group(type)
       HTTP_STATUS_CODES.select do |code, _|
         type.start_with? code.to_s[0]
       end
