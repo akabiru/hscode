@@ -18,7 +18,7 @@ describe Hscode::InputParser do
       end
     end
 
-    context 'valid list http code by type' do
+    context 'when option is `-l 5xx`' do
       it 'returns all http codes belonging to type' do
         expect do
           options = new_input_parser.parse(['-l', '5xx'])
@@ -26,6 +26,17 @@ describe Hscode::InputParser do
           expect(options.verbose).to be nil
           expect(options.status_type).to eq('5xx')
         end.to terminate.with_code(0)
+      end
+    end
+
+    context 'when option is `-l 5xc`' do
+      it 'should exit with status 1' do
+        expect do
+          options = new_input_parser.parse(['-l', '5xc'])
+          expect(options).to be_an_instance_of(OpenStruct)
+          expect(options.verbose).to be nil
+          expect(options.status_type).to eq('5xx')
+        end.to terminate.with_code(1)
       end
     end
 
@@ -44,7 +55,6 @@ describe Hscode::InputParser do
         expect do
           options = new_input_parser.parse(['--help'])
           expect(options).to be_an_instance_of(OpenStruct)
-          expect { options }.to output.to_stdout
         end.to terminate.with_code(0)
       end
     end
@@ -54,7 +64,6 @@ describe Hscode::InputParser do
         expect do
           options = new_input_parser.parse(['--version'])
           expect(options).to be_an_instance_of(OpenStruct)
-          expect { options }.to output.to_stdout
         end.to terminate.with_code(0)
       end
     end

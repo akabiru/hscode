@@ -23,7 +23,8 @@ require 'rspec'
 RSpec.configure do |config|
   config.before(:all) do
     @original_stdout = $stdout
-    $stdout = File.new(File.join(File.dirname(__FILE__), 'test_dump.txt'), 'w')
+    $stdout = File.new(File.join(File.dirname(__FILE__), 'test.log'), 'w')
+    Pry.output = @original_stdout
   end
 
   config.after(:all) do
