@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'coveralls'
 require 'pry'
+require 'exit_code_matchers'
 
 Coveralls.wear!
 
@@ -23,4 +24,4 @@ RSpec.configure do |config|
   # custom RSpec configurations
 end
 
-ENV["RUBY_ENV"] = "test"
+ENV['RUBY_ENV'] = 'test'

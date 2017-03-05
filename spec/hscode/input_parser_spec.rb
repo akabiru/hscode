@@ -25,7 +25,7 @@ describe Hscode::InputParser do
           expect(options).to be_an_instance_of(OpenStruct)
           expect(options.verbose).to be nil
           expect(options.status_type).to eq('5xx')
-        end.to raise_error(SystemExit)
+        end.to terminate.with_code(0)
       end
     end
 
@@ -35,7 +35,7 @@ describe Hscode::InputParser do
           options = new_input_parser.parse(['-l'])
           expect(options).to be_an_instance_of(OpenStruct)
           expect(options.status_type).to be nil
-        end.to raise_error(SystemExit)
+        end.to terminate.with_code(0)
       end
     end
 
@@ -45,7 +45,7 @@ describe Hscode::InputParser do
           options = new_input_parser.parse(['--help'])
           expect(options).to be_an_instance_of(OpenStruct)
           expect { options }.to output.to_stdout
-        end.to raise_error(SystemExit)
+        end.to terminate.with_code(0)
       end
     end
 
@@ -55,7 +55,7 @@ describe Hscode::InputParser do
           options = new_input_parser.parse(['--version'])
           expect(options).to be_an_instance_of(OpenStruct)
           expect { options }.to output.to_stdout
-        end.to raise_error(SystemExit)
+        end.to terminate.with_code(0)
       end
     end
 
@@ -63,7 +63,7 @@ describe Hscode::InputParser do
       let(:options) { new_input_parser.parse(['-f']) }
 
       it 'raises an error' do
-        expect { options }.to raise_error SystemExit
+        expect { options }.to terminate.with_code(1)
       end
     end
   end
