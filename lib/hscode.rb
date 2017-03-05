@@ -22,36 +22,38 @@ module Hscode
         exit
       end
 
-      PrettyPrint.print(
-        "#{options.status_code} - #{status_code[:title]}",
-        options.status_code.to_s[0]
+      print_result(options.status_code, status_code[:title],
+        status_code[:description], options.verbose
       )
-      print_description(status_code) if options.verbose
     end
 
     def self.print_title(options)
-      status_object = HTTP_STATUS_CODES.detect  do |_, value|
-        value[:title].casecmp(options.title) == 0
-      end
+      title_data = get_title_data(options.title)
 
-      unless status_object
+      unless title_data
         puts "#{options.title} is not a valid HTTP status. " \
         "See 'hscode --list' to see the list of valid HTTP codes."
         exit 1
       end
 
-      status_code = status_object.first
-
-      PrettyPrint.print(
-        "#{status_object[1][:title]} - #{status_code}",
-        status_code.to_s[0]
+      print_result(title_data.first, title_data[1][:title],
+        title_data[1][:description], options.verbose
       )
-
-      print_description(status_object[1]) if options.verbose
     end
 
-    def self.print_description(status_code)
-      status_code[:description].each do |desc|
+    def self.get_title_data(title)
+      HTTP_STATUS_CODES.detect  do |_, value|
+        value[:title].casecmp(title) == 0
+      end
+    end
+
+    def self.print_result(code, title, desc, verbose)
+      PrettyPrint.print( "#{code} - #{title}", code.to_s[0])
+      print_description(desc) if verbose
+    end
+
+    def self.print_description(descriptions)
+      descriptions.each do |desc|
         PrettyPrint.print("\n#{desc}", '0')
       end
     end
