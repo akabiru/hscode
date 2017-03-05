@@ -23,8 +23,7 @@ module Hscode
       end
 
       print_result(options.status_code, status_code[:title],
-        status_code[:description], options.verbose
-      )
+                   status_code[:description], options.verbose)
     end
 
     def self.print_title(options)
@@ -37,18 +36,17 @@ module Hscode
       end
 
       print_result(title_data.first, title_data[1][:title],
-        title_data[1][:description], options.verbose
-      )
+                   title_data[1][:description], options.verbose)
     end
 
     def self.get_title_data(title)
-      HTTP_STATUS_CODES.detect  do |_, value|
-        value[:title].casecmp(title) == 0
+      HTTP_STATUS_CODES.detect do |_, value|
+        value[:title].casecmp(title).zero?
       end
     end
 
     def self.print_result(code, title, desc, verbose)
-      PrettyPrint.print( "#{code} - #{title}", code.to_s[0])
+      PrettyPrint.print("#{code} - #{title}", code.to_s[0])
       print_description(desc) if verbose
     end
 
