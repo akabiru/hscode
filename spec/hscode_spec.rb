@@ -25,8 +25,8 @@ describe Hscode do
       context 'when options is search' do
         let(:search_cmd) { described_class.call(['-s', 'ok']) }
         let(:search_verbose_cmd) { described_class.call(['-s', 'ok', '-v']) }
-        let(:invalid_search_cmd) { described_class.call(['-s', 'notfound', '-v']) }
-        let(:error_msg) { "notfound is not a valid HTTP status." }
+        let(:bad_search_cmd) { described_class.call(['-s', 'notfound', '-v']) }
+        let(:error_msg) { 'notfound is not a valid HTTP status.' }
 
         it 'prints search result' do
           expect do
@@ -40,9 +40,9 @@ describe Hscode do
           end.to terminate.with_code(0)
         end
 
-         it 'prints an error message' do
+        it 'prints an error message' do
           expect do
-            expect(invalid_search_cmd).to match error_msg
+            expect(bad_search_cmd).to match error_msg
           end.to terminate.with_code(1)
         end
       end
