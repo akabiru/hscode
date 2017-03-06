@@ -17,7 +17,6 @@ describe Hscode do
         it 'prints full status code documentation' do
           expect do
             expect(verbose_cmd).to be_an_instance_of(Array)
-            expect(verbose_cmd)
               .to match_array(Hscode::HTTP_STATUS_CODES[200][:description])
           end.to terminate.with_code(0)
         end
