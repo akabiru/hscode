@@ -59,8 +59,11 @@ module Hscode
     end
 
     def list_status_codes(opts)
-      opts.on('-l', '--list', 'List all HTTP status codes') do
-        print_all_codes
+      opts.on('-l', '--list [TYPE]',
+              'List all HTTP status codes of type') do |type|
+        print_all_codes unless type
+        options.status_type = type
+        print_all_codes_by_type(type)
       end
     end
 
@@ -73,6 +76,7 @@ module Hscode
           hscode -s ok
           hscode -s 'not found'
           hscode -s ok -v
+          hscode -l 2xx
         "
         exit
       end
@@ -82,6 +86,31 @@ module Hscode
       opts.on_tail('--version', 'Show version') do
         puts Hscode::VERSION
         exit
+      end
+    end
+
+    def print_all_codes_by_type(type)
+      unless type =~ /\A[1-5]x{2}\z/
+        abort "#{type} is not a valid code type. See 'hscode --help'."
+      end
+
+      colour_code = type.to_s[0]
+      PrettyPrint.print("#{type}   #{STATUS_CODE_TYPES[type]}\n", colour_code)
+
+      process_code_type(type, colour_code)
+    end
+
+    def process_code_type(type, colour)
+      code_type_group(type).map do |code, info_hash|
+        PrettyPrint.print("#{code} - #{info_hash[:title]}", colour)
+      end
+
+      exit
+    end
+
+    def code_type_group(type)
+      HTTP_STATUS_CODES.select do |code, _|
+        type.start_with? code.to_s[0]
       end
     end
 

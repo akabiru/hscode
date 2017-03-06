@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'coveralls'
 require 'pry'
+require 'exit_code_matchers'
 
 Coveralls.wear!
 
@@ -20,7 +21,16 @@ require 'hscode'
 require 'rspec'
 
 RSpec.configure do |config|
-  # custom RSpec configurations
+  config.before(:all) do
+    @original_stdout = $stdout
+    $stdout = File.new(File.join(File.dirname(__FILE__), 'test.log'), 'w')
+    Pry.output = @original_stdout
+  end
+
+  config.after(:all) do
+    $stdout = @original_stdout
+    @original_stdout = nil
+  end
 end
 
-ENV["RUBY_ENV"] = "test"
+ENV['RUBY_ENV'] = 'test'
