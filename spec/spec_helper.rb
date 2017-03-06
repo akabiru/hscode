@@ -1,7 +1,8 @@
-require 'simplecov'
 require 'coveralls'
+require 'open3'
 require 'pry'
-require 'exit_code_matchers'
+require 'simplecov'
+require 'test_helpers/exit_code_matchers'
 
 Coveralls.wear!
 
