@@ -17,7 +17,6 @@ module Hscode
 
     def self.print_code(options)
       status_code = HTTP_STATUS_CODES[options.status_code.to_i]
-
       unless status_code
         puts "#{options.status_code} is not a valid code. See 'hscode --help'."
         exit 1
@@ -29,7 +28,6 @@ module Hscode
 
     def self.print_title(options)
       title_data = get_title_data(options.title)
-
       unless title_data
         puts "#{options.title} is not a valid HTTP status. " \
         "See 'hscode --list' to see the list of valid HTTP codes."
@@ -49,6 +47,8 @@ module Hscode
     def self.print_result(code, title, desc, verbose)
       PrettyPrint.print("#{code} - #{title}", code.to_s[0])
       print_description(desc) if verbose
+
+      exit
     end
 
     def self.print_description(descriptions)
