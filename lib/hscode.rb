@@ -24,31 +24,36 @@ module Hscode
 
       print_result(options.status_code, status_code[:title],
                    status_code[:description], options.verbose)
+      exit
     end
 
     def self.print_title(options)
       title_data = get_title_data(options.title)
-      unless title_data
+
+      if title_data.empty?
         puts "#{options.title} is not a valid HTTP status. " \
         "See 'hscode --list' to see the list of valid HTTP codes."
         exit 1
       end
 
-      print_result(title_data.first, title_data[1][:title],
-                   title_data[1][:description], options.verbose)
+      title_data.each do |data|
+        print_result(data.first, data[1][:title],
+                   data[1][:description], options.verbose)
+      end
+      exit
     end
 
     def self.get_title_data(title)
-      HTTP_STATUS_CODES.detect do |_, value|
-        value[:title].casecmp(title).zero?
+      data = HTTP_STATUS_CODES.select do |_, value|
+        value[:title].downcase.match title.downcase
       end
+      data
     end
 
     def self.print_result(code, title, desc, verbose)
       PrettyPrint.print("#{code} - #{title}", code.to_s[0])
       print_description(desc) if verbose
 
-      exit
     end
 
     def self.print_description(descriptions)
