@@ -69,7 +69,7 @@ describe Hscode::InputParser do
     end
 
     context 'search for code with title' do
-      it 'sees -s as a valid request' do
+      it 'detects -s as a valid command' do
         options = new_input_parser.parse(['-s', 'ok'])
         expect(options).to be_an_instance_of(OpenStruct)
         expect(options.verbose).to be nil

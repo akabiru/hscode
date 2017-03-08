@@ -30,17 +30,20 @@ module Hscode
     def self.print_title(options)
       title_data = get_title_data(options.title)
 
-      if title_data.empty?
-        puts "#{options.title} is not a valid HTTP status. " \
-        "See 'hscode --list' to see the list of valid HTTP codes."
-        exit 1
-      end
+      validate_title_data(title_data, options)
 
       title_data.each do |data|
         print_result(data.first, data[1][:title],
-                   data[1][:description], options.verbose)
+                     data[1][:description], options.verbose)
       end
       exit
+    end
+
+    def self.validate_title_data(title_data, options)
+      return unless title_data.empty?
+      puts "#{options.title} is not a valid HTTP status. " \
+      "See 'hscode --list' to see the list of valid HTTP codes."
+      exit 1
     end
 
     def self.get_title_data(title)
@@ -53,7 +56,6 @@ module Hscode
     def self.print_result(code, title, desc, verbose)
       PrettyPrint.print("#{code} - #{title}", code.to_s[0])
       print_description(desc) if verbose
-
     end
 
     def self.print_description(descriptions)
