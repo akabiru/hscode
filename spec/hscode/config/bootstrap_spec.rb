@@ -1,7 +1,7 @@
 require 'spec_helper'
 describe Bootstrap::Config do
   describe '#get' do
-    let(:root) { File.expand_path('../../../../', __FILE__) }
+    let(:root) { APP_ROOT }
 
     it 'gets all environment variables' do
       File.open("#{root}/config/env.yaml", 'w+') do |f|
