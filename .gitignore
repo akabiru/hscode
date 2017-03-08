@@ -7,6 +7,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-/config/env.yaml
+/spec/hscode/config/env.yaml
 /*.gem
 test.log

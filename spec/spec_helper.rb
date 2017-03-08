@@ -1,7 +1,8 @@
-require 'simplecov'
 require 'coveralls'
+require 'open3'
 require 'pry'
-require 'exit_code_matchers'
+require 'simplecov'
+require 'test_helpers/exit_code_matchers'
 
 Coveralls.wear!
 
@@ -14,7 +15,7 @@ SimpleCov.start
 require_relative '../config/bootstrap.rb'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-spec_dir = File.join($app_root, 'spec')
+spec_dir = File.join(APP_ROOT, 'spec')
 $LOAD_PATH.unshift(spec_dir) unless $LOAD_PATH.include?(spec_dir)
 
 require 'hscode'
