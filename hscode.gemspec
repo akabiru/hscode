@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'yard', '~> 0.9'
   spec.add_development_dependency 'rubocop', '~> 0.42'
-  spec.add_development_dependency 'brakeman', '~> 3.3'
+  spec.add_development_dependency 'brakeman', '~> 4.6'
   spec.add_development_dependency 'rubycritic', '~> 2.9'
 end
