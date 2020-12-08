@@ -106,6 +106,22 @@ describe Hscode::InputParser do
       end
     end
 
+    context 'search for code with title' do
+      it 'detects -s as a valid command' do
+        options = new_input_parser.parse(['-s', 'ok'])
+        expect(options).to be_an_instance_of(OpenStruct)
+        expect(options.verbose).to be nil
+        expect(options.title).to eql 'ok'
+      end
+
+      it 'searches with verbose' do
+        options = new_input_parser.parse(['-s', 'not found', '-v'])
+        expect(options).to be_an_instance_of(OpenStruct)
+        expect(options.verbose).to be true
+        expect(options.title).to eql 'not found'
+      end
+    end
+
     context 'Invalid requests' do
       let(:options) { new_input_parser.parse(['-f']) }
 

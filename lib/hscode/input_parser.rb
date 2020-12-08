@@ -1,4 +1,3 @@
-require 'hscode/pretty_print'
 
 module Hscode
   class InputParser
@@ -29,11 +28,19 @@ module Hscode
         run_verbosely(opts)
         show_status_code(opts)
         list_status_codes(opts)
+        search_status_code(opts)
 
         opts.separator ''
 
         display_help_message(opts)
         display_version_number(opts)
+      end
+    end
+
+    def search_status_code(opts)
+      opts.on('-s', '--search TITLE', String,
+              'Search for HTTP status code with its title') do |title|
+        options.title = title
       end
     end
 
@@ -65,12 +72,15 @@ module Hscode
 
     def display_help_message(opts)
       opts.on_tail('-h', '--help', 'Show this help message') do
-        puts opts, 'Examples:
+        puts opts, "Examples:
           hscode -c 200
           hscode -c 200 -v
           hscode -l
           hscode -l 2xx
-        '
+          hscode -s ok
+          hscode -s 'not found'
+          hscode -s ok -v
+        "
         exit
       end
     end
